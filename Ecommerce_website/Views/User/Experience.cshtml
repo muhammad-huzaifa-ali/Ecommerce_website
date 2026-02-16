@@ -1,0 +1,156 @@
+﻿@model Ecommerce_website.Models.ExperienceViewModel
+<link rel="stylesheet" href="~/WebsiteCss/Experience.css" asp-append-version="true" />
+
+<div class="experience-wrapper">
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1>Build Your Dream Setup</h1>
+            <p class="hero-subtitle">Select premium products & create your ultimate experience</p>
+            <p class="hero-text">From high-end gaming rigs to smart living gadgets, choose only the best for your lifestyle.</p>
+            <a href="#GamingZone" class="hero-cta">Explore Now</a>
+        </div>
+    </section> 
+
+
+    <!-- ================= GAMING ================= -->
+    <section class="exp-section" id="GamingZone">
+        <div class="section-header">
+            <h2>GAMING ZONE</h2>
+            <p>High performance gaming gear for ultimate power</p>
+        </div>
+
+        <form asp-action="AddExperienceOrder" method="post">
+            <div class="product-row">
+                @if (Model.GamingProducts != null && Model.GamingProducts.Any())
+                {
+                    foreach (var prod in Model.GamingProducts)
+                    {
+                        <div class="product-card">
+
+                            <div class="img-box">
+                                <img src="~/Product_images/@prod.product_image" alt="@prod.product_name" />
+                            </div>
+
+                            <div class="info">
+                                <h4>@prod.product_name</h4>
+                                <span class="price">Rs @prod.product_price</span>
+                            </div>
+
+                            <div class="card-actions">
+                                <a asp-controller="User" asp-action="ProductDetails" asp-route-id="@prod.product_id" class="view-btn">View Product</a>
+                                <label class="select">
+                                    <input type="checkbox" name="SelectedProducts" value="@prod.product_id">
+                                    Add
+                                </label>
+                            </div>
+
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="empty">No Gaming Products Available</p>
+                }
+            </div>
+
+            <div class="btn-wrap">
+                <button class="order-btn">Order Gaming Setup</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ================= WORK FROM HOME ================= -->
+    <section class="exp-section dark">
+        <div class="section-header">
+            <h2>WORK FROM HOME</h2>
+            <p>Professional workspace for productivity</p>
+        </div>
+
+        <form asp-action="AddExperienceOrder" method="post">
+            <div class="product-row">
+                @if (Model.WorkProducts != null && Model.WorkProducts.Any())
+                {
+                    foreach (var prod in Model.WorkProducts)
+                    {
+                        <div class="product-card">
+                            <div class="img-box">
+                                <img src="~/Product_images/@prod.product_image" alt="@prod.product_name" />
+                            </div>
+
+                            <div class="info">
+                                <h4>@prod.product_name</h4>
+                                <span class="price">Rs @prod.product_price</span>
+                            </div>
+
+                            <div class="card-actions">
+                                <a asp-controller="User" asp-action="ProductDetails" asp-route-id="@prod.product_id" class="view-btn">View Product</a>
+                                <label class="select">
+                                    <input type="checkbox" name="SelectedProducts" value="@prod.product_id">
+                                    Add
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="empty">No Work From Home Products Available</p>
+                }
+            </div>
+
+            <div class="btn-wrap">
+                <button class="order-btn">Order Work Setup</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- ================= SMART LIVING ================= -->
+    <section class="exp-section">
+        <div class="section-header">
+            <h2>SMART LIVING</h2>
+            <p>Upgrade your lifestyle with smart technology</p>
+        </div>
+
+        <form asp-action="AddExperienceOrder" method="post">
+            <div class="product-row">
+                @if (Model.SmartProducts != null && Model.SmartProducts.Any())
+                {
+                    foreach (var prod in Model.SmartProducts)
+                    {
+                        <div class="product-card">
+                            <div class="img-box">
+                                <img src="~/Product_images/@prod.product_image" alt="@prod.product_name" />
+                            </div>
+
+                            <div class="info">
+                                <h4>@prod.product_name</h4>
+                                <span class="price">Rs @prod.product_price</span>
+                            </div>
+
+                            <div class="card-actions">
+                                <a asp-controller="User" asp-action="ProductDetails" asp-route-id="@prod.product_id" class="view-btn">View Product</a>
+                                <label class="select">
+                                    <input type="checkbox" name="SelectedProducts" value="@prod.product_id">
+                                    Add
+                                </label>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p class="empty">No Smart Living Products Available</p>
+                }
+            </div>
+
+            <div class="btn-wrap">
+                <button class="order-btn">Order Smart Setup</button>
+            </div>
+        </form>
+    </section>
+
+</div>

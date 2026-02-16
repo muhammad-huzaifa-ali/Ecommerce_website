@@ -1,0 +1,160 @@
+﻿
+@model Ecommerce_website.Models.Product
+
+
+<style>
+
+    body {
+        background: #f5f6fa;
+    }
+
+    /* MAIN BOX */
+    .product-main {
+        background: #fff;
+        border-radius: 14px;
+        padding: 40px;
+        box-shadow: 0 5px 25px rgba(0,0,0,.08);
+    }
+
+    /* IMAGE BOX */
+    .product-img-box {
+        background: #f9f9f9;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .product-img {
+        max-height: 420px;
+        width: 100%;
+        object-fit: contain;
+    }
+
+    /* TITLE */
+    .product-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #111;
+    }
+
+    /* PRICE */
+    .price {
+        font-size: 26px;
+        font-weight: 800;
+        color: #f7b500; /* yellow theme */
+    }
+
+    /* CATEGORY */
+    .cat {
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    /* DESCRIPTION */
+    .desc {
+        color: #444;
+        line-height: 1.7;
+    }
+
+    /* BUTTONS */
+    .cart-btn {
+        background: #f7b500;
+        border: none;
+        padding: 12px 28px;
+        font-weight: 700;
+        border-radius: 8px;
+        color: #000;
+        transition: .3s;
+    }
+
+        .cart-btn:hover {
+            background: #ffcc00;
+            transform: scale(1.05);
+        }
+
+    .buy-btn {
+        background: #111;
+        border: none;
+        padding: 12px 28px;
+        font-weight: 700;
+        border-radius: 8px;
+        color: #fff;
+        transition: .3s;
+    }
+
+        .buy-btn:hover {
+            background: #000;
+            transform: scale(1.05);
+        }
+
+    /* MOBILE */
+    @@media(max - width:768px) {
+        .product-main
+
+    {
+        padding: 20px;
+    }
+
+    .product-title {
+        font-size: 22px;
+    }
+
+    .price {
+        font-size: 22px;
+    }
+
+    }
+</style>
+
+
+<div class="container py-5">
+
+    <div class="product-main">
+        <div class="row align-items-center">
+
+            <!-- LEFT IMAGE -->
+            <div class="col-md-5">
+                <div class="product-img-box">
+                    <img src="~/Product_images/@Model.product_image"
+                         class="product-img" />
+                </div>
+            </div>
+
+            <!-- RIGHT DETAILS -->
+            <div class="col-md-7">
+
+                <h2 class="product-title mb-2">
+                    @Model.product_name
+                </h2>
+
+                <div class="price mb-2">
+                    Rs. @Model.product_price.ToString("N0")
+                </div>
+
+                <div class="cat mb-3">
+                    Category: @Model.category.category_name
+                </div>
+
+                <p class="desc mb-4">
+                    @Model.product_description
+                </p>
+
+                <div class="d-flex gap-3">
+                    <a href="@Url.Action("AddToCart", "User", new { id = Model.product_id })"
+                       class="cart-btn text-decoration-none">
+                        🛒 Add To Cart
+                    </a>
+
+                    <a href="@Url.Action("BuyNow", "User", new { id = Model.product_id })"
+                       class="buy-btn text-decoration-none">
+                        ⚡ Buy Now
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

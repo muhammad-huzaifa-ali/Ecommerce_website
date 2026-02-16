@@ -1,0 +1,143 @@
+﻿@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@model Ecommerce_website.Models.Order
+
+<style>
+    body {
+        background: #f6f7fb;
+    }
+
+    .vip-card {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0,0,0,.08);
+        transition: .3s;
+    }
+
+        .vip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0,0,0,.12);
+        }
+
+    .section-title {
+        font-weight: 700;
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #0d6efd;
+    }
+
+    .info-line {
+        padding: 6px 0;
+        border-bottom: 1px dashed #eee;
+        font-size: 15px;
+    }
+
+        .info-line:last-child {
+            border-bottom: none;
+        }
+
+    .product-img {
+        max-height: 160px;
+        object-fit: contain;
+        border-radius: 12px;
+        padding: 10px;
+        background: #f8f9fa;
+    }
+
+    .total-box {
+        background: linear-gradient(45deg,#28a745,#20c997);
+        color: #fff;
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 12px;
+    }
+
+    .back-btn {
+        padding: 10px 28px;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+</style>
+
+<div class="container py-4">
+
+    <h3 class="fw-bold text-center mb-4">📦 Order Details</h3>
+
+    <div class="row g-4">
+
+        <!-- CUSTOMER -->
+        <div class="col-md-6">
+            <div class="vip-card bg-white p-4 h-100">
+
+                <div class="section-title">👤 Customer Information</div>
+
+                <div class="info-line"><b>Name:</b> @Model.customer.customer_name</div>
+                <div class="info-line"><b>Email:</b> @Model.customer.customer_email</div>
+                <div class="info-line"><b>Phone:</b> @Model.customer.customer_phone</div>
+                <div class="info-line"><b>Customer ID:</b> @Model.customer.customer_id</div>
+                <div class="info-line"><b>Address:</b> @Model.customer.customer_address</div>
+                <div class="info-line"><b>City:</b> @Model.customer.customer_city</div>
+                <div class="info-line"><b>Country:</b> @Model.customer.customer_country</div>
+
+            </div>
+        </div>
+
+        <!-- PRODUCT -->
+        <div class="col-md-6">
+            <div class="vip-card bg-white p-4 text-center h-100">
+
+                <div class="section-title">📦 Product Information</div>
+
+                <img src="~/Product_images/@Model.product.product_image"
+                     class="product-img mb-3" />
+
+                <div class="info-line"><b>Product:</b> @Model.product.product_name</div>
+                <div class="info-line"><b>Product ID:</b> @Model.product.product_id</div>
+                <div class="info-line"><b>Price:</b> Rs @Model.product.product_price</div>
+                <div class="info-line"><b>Quantity:</b> @Model.quantity</div>
+
+                @{
+                    decimal total = Model.product.product_price * Model.quantity;
+                }
+
+                <div class="total-box">
+                    Total: Rs @total
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ORDER INFO -->
+    <div class="vip-card bg-white p-4 mt-4">
+
+        <div class="section-title">🧾 Order Info</div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="info-line"><b>Order ID:</b> @Model.order_id</div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="info-line"><b>Date:</b> @Model.order_date.ToString("dd MMM yyyy")</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/Admin/FetchOrders" class="btn btn-dark back-btn">
+            ⬅ Back to Orders
+        </a>
+    </div>
+
+</div>

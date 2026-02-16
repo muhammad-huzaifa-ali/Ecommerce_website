@@ -1,0 +1,195 @@
+﻿@model List<Ecommerce_website.Models.Product>
+
+
+
+<style>
+
+    body {
+        background: #f5f6fa;
+    }
+
+    /* HEADING */
+    .checkout-title {
+        font-size: 38px;
+        font-weight: 800;
+        color: #111;
+    }
+
+    .subtitle {
+        color: #777;
+    }
+
+    /* PRODUCT CARD */
+    .product-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 18px;
+        transition: .3s;
+        border: 1px solid #eee;
+        height: 100%;
+    }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,.12);
+        }
+
+    /* IMAGE */
+    .product-img-wrap {
+        background: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-img {
+        max-height: 180px;
+        object-fit: contain;
+        transition: .3s;
+    }
+
+    .product-card:hover .product-img {
+        transform: scale(1.08);
+    }
+
+    /* TITLE */
+    .product-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #111;
+        min-height: 45px;
+    }
+
+    /* PRICE */
+    .price-tag {
+        font-size: 20px;
+        font-weight: 800;
+        color: #f7b500;
+    }
+
+    /* BUTTON */
+    .view-btn {
+        background: #111;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 7px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: .3s;
+    }
+
+        .view-btn:hover {
+            background: #f7b500;
+            color: #000;
+        }
+
+    /* PAGINATION */
+    .pagination .page-link {
+        border: none;
+        margin: 0 5px;
+        border-radius: 8px;
+        color: #111;
+        background: #eee;
+        font-weight: 600;
+    }
+
+    .pagination .active .page-link {
+        background: #f7b500;
+        color: #000;
+    }
+
+    /* MOBILE */
+    @@media(max - width:768px) {
+        .checkout-title
+
+    {
+        font-size: 26px;
+    }
+
+    }
+</style>
+
+
+
+<div class="container py-5 fade-in">
+
+    <!-- HEADING -->
+    <div class="text-center mb-5">
+        <h1 class="checkout-title">Our Collection</h1>
+        <p class="subtitle">Premium gadgets for you</p>
+    </div>
+
+
+    <div class="row g-4">
+
+        @foreach (var p in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="glass-card product-card">
+
+                    <!-- IMAGE -->
+                    <div class="product-img-wrap text-center">
+                        <img src="~/Product_images/@p.product_image"
+                             alt="@p.product_name"
+                             class="product-img">
+                    </div>
+
+                    <!-- INFO -->
+                    <div class="p-3">
+
+                        <h5 class="fw-bold product-title">
+                            @p.product_name
+                        </h5>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <span class="price-tag">
+                                Rs @p.product_price.ToString("N0")
+                            </span>
+
+                            <a asp-action="ProductDetails"
+                               asp-controller="User"
+                               asp-route-id="@p.product_id"
+                               class="view-btn">
+                                View
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <!-- PAGINATION -->
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+
+                    <a class="page-link"
+                       asp-action="CategoryProducts"
+                       asp-route-categoryId="@ViewBag.CategoryId"
+                       asp-route-page="@i">
+                        @i
+                    </a>
+
+                </li>
+            }
+
+        </ul>
+    </nav>
+
+</div>
+
+
+
+
+

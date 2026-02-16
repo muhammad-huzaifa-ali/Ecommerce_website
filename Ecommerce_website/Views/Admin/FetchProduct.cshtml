@@ -1,0 +1,162 @@
+﻿
+@model List<Ecommerce_website.Models.Product>
+@{
+    Layout = "_Dashboard";
+}
+
+<style>
+    /* ===== Table polish ===== */
+    .vip-table th {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    .vip-table tbody tr {
+        transition: all .2s ease;
+    }
+
+        .vip-table tbody tr:hover {
+            background-color: rgba(13,110,253,.04);
+        }
+
+    /* ===== Action buttons ===== */
+
+    .action-btn {
+        border: none;
+        background: transparent;
+        padding: 4px 6px;
+        transition: .2s;
+        border-radius: 6px;
+    }
+
+        .action-btn.view {
+            color: #0d6efd;
+        }
+
+        .action-btn.edit {
+            color: #0dcaf0;
+        }
+
+        .action-btn.delete {
+            color: #dc3545;
+        }
+
+        .action-btn:hover {
+            background: rgba(0,0,0,.05);
+            transform: scale(1.1);
+        }
+
+    .vip-table th,
+    .vip-table td {
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .small-md {
+        font-size: 14px;
+    }
+
+    .small {
+        font-size: 13px;
+    }
+
+    #Add{
+      
+        background-color :royalblue;
+    }
+</style>
+
+<div class="container-fluid py-4">
+
+   
+
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body">
+
+           
+
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <h5 class="fw-bold text-primary mb-0">
+                    Products List
+                </h5>
+
+                <a href="@Url.Action("AddProduct", "Admin")"
+                   id="Add" class="btn btn-primary action-btn">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add Product
+                </a>
+
+                <span class="badge bg-light text-dark">
+                    Total: @Model.Count
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+                <table class="table vip-table align-middle mb-0 small small-md">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Product Name</th>
+                            <th class="d-none d-md-table-cell">Category</th>
+                            <th class="d-none d-lg-table-cell">Price</th>
+                          
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{
+                            int count = 1;
+                        }
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@count</td>
+
+                                <td class="fw-semibold text-nowrap">
+                                    @product.product_name
+                                </td>
+
+                                <td class="d-none d-md-table-cell small text-break">
+                                    @product.category.category_name
+                                </td>
+
+                                <td class="d-none d-lg-table-cell text-nowrap">
+                                    @product.product_price.ToString("N0")
+                                </td>
+
+                               
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a class="action-btn view"
+                                           href="@Url.Action("ProductDetails", "Admin", new { id = product.product_id })">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+
+                                        <a class="action-btn edit"
+                                           href="@Url.Action("EditProduct", "Admin", new { id = product.product_id })">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        <a class="action-btn delete"
+                                           href="@Url.Action("DeleteProduct", "Admin", new { id = product.product_id })"
+                                           onclick="return confirm('Delete this product?')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

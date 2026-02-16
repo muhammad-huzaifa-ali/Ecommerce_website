@@ -1,0 +1,172 @@
+﻿/* ================= VIP CONTACT US STYLING ================= */
+
+.contact-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #111;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 40px;
+}
+
+.success {
+    text-align: center;
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.contact-grid {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* ================= LEFT FORM ================= */
+.contact-form-box {
+    flex: 1 1 450px;
+    background: #fff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .contact-form-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+
+    .contact-form-box h2 {
+        font-size: 1.9rem;
+        margin-bottom: 15px;
+        color: #222;
+    }
+
+    .contact-form-box .sub-text {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 25px;
+    }
+
+    .contact-form-box input,
+    .contact-form-box textarea {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .contact-form-box input:focus,
+        .contact-form-box textarea:focus {
+            border-color: #f9b700; /* VIP golden accent */
+            box-shadow: 0 0 8px rgba(249, 183, 0, 0.3);
+            outline: none;
+        }
+
+    .contact-form-box button {
+        background-color: #f9b700;
+        color: #111;
+        font-weight: 600;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+        .contact-form-box button:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+        }
+
+/* ================= RIGHT VIP CONTACT INFO ================= */
+.vip-contact-box {
+    flex: 1 1 350px;
+    background: #111;
+    color: #fff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+    .vip-contact-box h2 {
+        font-size: 1.9rem;
+        margin-bottom: 25px;
+        color: #f9b700; /* VIP golden accent */
+        border-bottom: 2px solid #f9b700;
+        display: inline-block;
+        padding-bottom: 5px;
+    }
+
+.vip-item {
+    margin-bottom: 25px;
+}
+
+    .vip-item h4 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+        color: #fff;
+    }
+
+    .vip-item p {
+        font-size: 0.95rem;
+        color: #ccc;
+        margin-bottom: 8px;
+    }
+
+.vip-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+    .vip-btn:hover {
+        background-color: #1ebe5d;
+        transform: translateY(-2px);
+    }
+
+.vip-number, .vip-email, .vip-item span {
+    display: block;
+    font-weight: 500;
+    color: #f9b700;
+    margin-top: 3px;
+}
+
+.vip-note {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+    .contact-grid {
+        flex-direction: column;
+    }
+
+    .vip-contact-box, .contact-form-box {
+        flex: 1 1 100%;
+    }
+}

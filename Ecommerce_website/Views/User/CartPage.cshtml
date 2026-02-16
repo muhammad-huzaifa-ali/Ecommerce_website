@@ -1,0 +1,159 @@
+﻿@model List<Ecommerce_website.Models.Cart>
+
+
+<div class="container py-5 fade-in">
+
+    <div class="text-center mb-5">
+        <h1 class="checkout-title">🛒 My Shopping Cart</h1>
+        <p class="text-muted fs-5">Review your items before checkout</p>
+    </div>
+
+    <div class="glass-card p-4">
+
+        <div class="table-responsive">
+            <table class="table align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th width="170">Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @{
+                        decimal grand = 0;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        decimal price = item.product.product_price;
+                        decimal total = price * item.product_quantity;
+                        grand += total;
+
+                        <tr>
+                            <td class="d-flex align-items-center gap-3">
+                                <img src="~/Product_images/@item.product.product_image"
+                                     width="70" class="product-img" />
+
+                                <div class="text-start">
+                                    <b>@item.product.product_name</b>
+                                </div>
+                            </td>
+
+                            <td class="fw-semibold">Rs @price.ToString("N0")</td>
+
+                            <td>
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+
+                                    <a href="/User/DecreaseQty/@item.cart_id"
+                                       class="btn btn-outline-dark btn-sm">-</a>
+
+                                    <b>@item.product_quantity</b>
+
+                                    <a href="/User/IncreaseQty/@item.cart_id"
+                                       class="btn btn-outline-dark btn-sm">+</a>
+                                </div>
+                            </td>
+
+                            <td class="fw-bold text-success">Rs @total.ToString("N0")</td>
+
+                            <td>
+                                <a href="/User/RemoveCart/@item.cart_id"
+                                   class="btn btn-danger btn-sm">
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TOTAL -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h4 class="fw-bold">Grand Total</h4>
+            <h3 class="price-tag">Rs @grand.ToString("N0")</h3>
+        </div>
+
+        <a href="/User/CheckoutAll" class="order-btn w-100 mt-4 text-center">
+            🛍 Proceed To Checkout
+        </a>
+
+    </div>
+</div>
+
+
+<style>
+    body {
+        background: linear-gradient(135deg,#eef2ff,#f8f9ff);
+    }
+
+    .checkout-title {
+        font-size: 36px;
+        font-weight: 800;
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card {
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        transition: .4s;
+    }
+
+    .glass-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-img {
+        max-height: 70px;
+        object-fit: contain;
+        border-radius: 12px;
+    }
+
+    .price-tag {
+        font-size: 26px;
+        font-weight: 800;
+        color: #ff8800;
+    }
+
+    .order-btn {
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        border: none;
+        border-radius: 30px;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        transition: .4s;
+        text-decoration:none;
+        display:block;
+    }
+
+    .order-btn:hover {
+        transform: scale(1.04);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        color:#fff;
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeUp .6s ease forwards;
+    }
+
+    @@keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

@@ -1,0 +1,62 @@
+﻿<link rel="stylesheet" href="/WebsiteCss/ContactUs.css" />
+
+
+<div class="contact-container">
+
+    <h1 class="page-title">Contact Our Support Team</h1>
+
+    @if (TempData["success"] != null)
+    {
+        <div class="success">@TempData["success"]</div>
+    }
+
+    <div class="contact-grid">
+
+        <!-- LEFT FEEDBACK FORM -->
+        <div class="contact-form-box">
+            <h2>Send Message</h2>
+            <p class="sub-text">We usually reply within minutes on WhatsApp or Email.</p>
+
+            <form asp-action="SendFeedback" method="post">
+                <input type="text" name="customer_name" placeholder="Your Name" required />
+                <input type="email" name="customer_email" placeholder="Your Email" required />
+                <textarea name="customer_message" placeholder="Write your message..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <!-- RIGHT VIP CONTACT INFO -->
+        <div class="vip-contact-box">
+
+            <h2>Contact Information</h2>
+
+            <div class="vip-item">
+                <h4>WhatsApp Support</h4>
+                <p>For instant reply contact us on WhatsApp</p>
+                <a href="https://wa.me/923001234567" target="_blank" class="vip-btn">
+                    Chat on WhatsApp
+                </a>
+                <span class="vip-number">+92 300 1234567</span>
+            </div>
+
+            <div class="vip-item">
+                <h4>Email Support</h4>
+                <p>Send us your queries anytime</p>
+                <span class="vip-email">support@yourstore.com</span>
+            </div>
+
+            <div class="vip-item">
+                <h4>Customer Care</h4>
+                <p>Available 7 days a week</p>
+                <span>10 AM – 10 PM</span>
+            </div>
+
+            <div class="vip-note">
+                We value our customers and are always ready to assist you.
+            </div>
+
+        </div>
+
+    </div>
+</div>

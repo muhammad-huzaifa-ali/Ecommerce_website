@@ -1,0 +1,354 @@
+﻿
+/* ================= GLOBAL ================= */
+body {
+    background: #0f1115;
+    font-family: 'Poppins',sans-serif;
+    color: #fff;
+}
+
+section {
+    padding: 80px 20px;
+}
+
+/* ================= INTRO ================= */
+.intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 60px auto;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.intro-left {
+    flex: 1;
+}
+
+    .intro-left h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #ffc107;
+        margin-bottom: 15px;
+    }
+
+    .intro-left p {
+        font-size: 1.2rem;
+        color: #bbb;
+        margin-bottom: 30px;
+    }
+
+.vip-cta {
+    background: #ffc107;
+    color: #000;
+    padding: 14px 35px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .vip-cta:hover {
+        background: #ffdb4d;
+        transform: scale(1.05);
+    }
+
+/* feature cards */
+.intro-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 25px;
+}
+
+.feature-card {
+    background: #181c23;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    transition: .4s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(255,193,7,0.2);
+    }
+
+    .feature-card i {
+        font-size: 2.3rem;
+        color: #ffc107;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+/* ================= MISSION ================= */
+.our-story {
+    background: #11141a;
+    text-align: center;
+}
+
+    .our-story h2 {
+        color: #ffc107;
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+    }
+
+    .our-story p {
+        max-width: 700px;
+        margin: auto;
+        color: #aaa;
+    }
+
+.usps {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    gap: 25px;
+}
+
+.usp-card {
+    background: #181c23;
+    padding: 30px;
+    border-radius: 18px;
+    transition: .3s;
+}
+
+    .usp-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(255,193,7,0.15);
+    }
+
+.usp-icon {
+    font-size: 2.5rem;
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+/* ================= TEAM ================= */
+.our-team {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+/* HEADING */
+#team-heading {
+    color: black; /* heading color */
+    font-family: 'Book Antiqua', monospace;
+    font-size: 2.6rem;
+    font-weight: 900; /* aur bold */
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* PARAGRAPH */
+#team-description {
+    color: #000; /* paragraph ko black */
+    font-size: 17px;
+    font-weight: 600;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+/* TEAM GRID */
+
+.team-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.team-member {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+}
+
+    .team-member img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        transition: .5s;
+    }
+
+    .team-member:hover img {
+        transform: scale(1.1);
+    }
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(transparent, black);
+    width: 100%;
+    padding: 20px;
+    transform: translateY(100%);
+    transition: .5s;
+    color: #fff;
+}
+
+.team-member:hover .overlay {
+    transform: translateY(0);
+}
+
+
+/* ================= STATS  ================= */
+
+.stats {
+    padding: 90px 20px;
+    background: linear-gradient(180deg,#0f1115,#0a0c10);
+    position: relative;
+    overflow: hidden;
+}
+
+    /* subtle glow background */
+    .stats::before {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle,#00f7ff22,transparent);
+        top: -150px;
+        left: -150px;
+    }
+
+    .stats::after {
+        content: '';
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle,#ffd00022,transparent);
+        bottom: -150px;
+        right: -150px;
+    }
+
+.stats-grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* glass cards */
+.stat-card {
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 20px;
+    border-radius: 20px;
+    text-align: center;
+    transition: .4s;
+}
+
+    /* hover glow */
+    .stat-card:hover {
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 0 20px 50px rgba(0,255,255,0.15);
+        border: 1px solid rgba(0,255,255,0.3);
+    }
+
+/* numbers */
+.stat-number {
+   
+    font-size: 3rem;
+    font-weight: 700;
+    color:gold;
+
+}
+
+/* text */
+.stat-card p {
+    color: #bbb;
+    margin-top: 10px;
+    font-size: 1.05rem;
+}
+
+/* mobile */
+@media(max-width:768px) {
+    .stat-number {
+        font-size: 2.2rem;
+    }
+}
+
+
+/* ================= TESTIMONIALS ================= */
+.testimonials {
+    background: #11141a;
+    text-align: center;
+}
+
+    .testimonials h2 {
+        color: #ffc107;
+    }
+
+.testimonial-slider {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 25px;
+}
+
+.testimonial-card {
+    background: #181c23;
+    padding: 25px;
+    border-radius: 18px;
+    transition: .3s;
+}
+
+    .testimonial-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .testimonial-card img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+/* ================= CTA ================= */
+.cta-shop {
+    text-align: center;
+    background: linear-gradient(45deg,#000,#1a1a1a);
+}
+
+    .cta-shop h2 {
+        color: #ffc107;
+        font-size: 2.3rem;
+    }
+
+.shop-cta {
+    display: inline-block;
+    margin-top: 20px;
+    background: #ffc107;
+    color: #000;
+    padding: 15px 40px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+    .shop-cta:hover {
+        background: #ffdb4d;
+        transform: scale(1.05);
+    }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px) {
+    .intro {
+        flex-direction: column;
+    }
+
+    .intro-left h1 {
+        font-size: 2rem;
+    }
+}

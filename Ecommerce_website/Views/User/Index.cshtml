@@ -1,0 +1,242 @@
+﻿ @model Ecommerce_website.Models.HomeViewModel
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="~/WebsiteCss/Home.css" asp-append-version="true" />
+
+
+
+
+
+
+<!-- ================= HERO SECTION ================= -->
+ <section class="hero-section">
+    <div class="hero-slider">
+        <img src="~/HomePage_images/HeroSection1.png" class="hero-slide active" />
+        <img src="~/HomePage_images/HeroSection2.png" class="hero-slide" />
+        <img src="~/HomePage_images/Herosection3.png" class="hero-slide" />
+    </div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container">
+        <h1>PREMIUM ELECTRONIC ACCESSORIES</h1>
+        <p class="hero-sub">Style • Protection • Performance</p>
+        <p class="hero-desc">
+            Upgrade your everyday tech with premium accessories crafted
+            for durability, elegance, and powerful performance.
+        </p>
+
+        <div class="hero-btns">
+            <a href="#categories" class="btn btn-primary rounded-pill px-4 py-2">
+                Shop Now
+            </a>
+            <a href="#" class="btn btn-outline-light rounded-pill px-4 py-2" id="Ex">
+                Explore Deals
+            </a>
+        </div>
+    </div>
+</section> 
+
+
+
+<!-- ================= CATEGORY SECTION ================= -->
+
+<section class="container py-5" id="categories">
+
+    <div class="text-center mb-5">
+        <h2 class="section-title">SHOP BY CATEGORY</h2>
+        <p class="section-subtitle">Curated collections made for your lifestyle</p>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var cat in Model.Categories)
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="category-card text-center h-100">
+
+                    <!-- ICON -->
+
+                    <div class="cat-icon">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                    </div>
+
+                    <h5 class="fw-semibold mt-3">@cat.category_name</h5>
+
+                    <a asp-action="CategoryProducts"
+                       asp-controller="User"
+                       asp-route-id="@cat.category_id"
+                       class="btn rounded-pill px-4 mt-3">
+                        View Collection
+                    </a>
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ================= MEGA TECH SALE  ================= -->
+        
+<section class="mega-banner">
+
+    <div class="mega-container">
+
+        <!-- LEFT IMAGE -->
+        <div class="mega-left">
+            <img src="/HomePage_images/Bannner.png" alt="Techora Sale">
+        </div>
+
+        <!-- RIGHT TEXT -->
+        <div class="mega-right">
+            <h1>MEGA TECH SALE </h1>
+
+            <p>Up to 40% OFF on Gaming & Smart TVs</p>
+            <p>Fast Delivery All Over Pakistan</p>
+            <p>Premium Quality Gadgets</p>
+            <p>Upgrade Your Setup with Techora</p>
+
+            <a href="/User/Shop" class="mega-btn">Shop Now</a>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+<!-- ================= TOP PRODUCTS SECTION ================= -->
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+        <h2 class="top-heading">TOP PRODUCTS</h2>
+        <p class="top-subheading">Hand Picked by our team</p>
+    </div>
+
+
+    <div class="row g-4">
+        @foreach (var item in Model.TopProducts)
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="vip-card h-100">
+
+                  
+
+                    <div class="vip-img-wrapper">
+                        <img src="~/Product_images/@item.product_image"
+                             alt="@item.product_name" />
+                    </div>
+
+                    <div class="vip-body text-center">
+                        <h6 class="vip-title">@item.product_name</h6>
+
+                        <p class="vip-price">
+                            Rs @item.product_price.ToString("N0")
+                        </p>
+
+                        <a asp-action="ProductDetails"
+                           asp-controller="User"
+                           asp-route-id="@item.product_id"
+                           class="vip-btn">
+                            View Product
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+
+<section class="why-techora">
+    <div class="container">
+
+        <h2 class="why-heading">WHY CHOOSE <span>TECHORA</span></h2>
+        <p class="why-sub">
+            We focus on premium products, fast delivery and trusted shopping experience.
+            Techora brings quality technology with reliability and style.
+        </p>
+
+        <div class="row text-center mt-5 g-4">
+
+            <!-- 1 -->
+            <div class="col-md-3">
+                <div class="why-card">
+                    <div class="icon-circle">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h5>Premium Quality</h5>
+                    <p>
+                        Only high-quality and original tech products.
+                        Tested and trusted for best performance.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="col-md-3">
+                <div class="why-card">
+                    <div class="icon-circle">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h5>Expert Team</h5>
+                    <p>
+                        Our tech experts ensure best service
+                        and help you choose perfect products.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="col-md-3">
+                <div class="why-card">
+                    <div class="icon-circle">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h5>Customer Support</h5>
+                    <p>
+                        Friendly and fast support for every order.
+                        We care about your satisfaction.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="col-md-3">
+                <div class="why-card">
+                    <div class="icon-circle">
+                        <i class="bi bi-truck"></i>
+                    </div>
+                    <h5>Fast Delivery</h5>
+                    <p>
+                        Secure and quick delivery across country.
+                        Your tech delivered safely.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!-- ================= SCRIPT Hero  ================= -->
+<script>
+    const slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+
+    setInterval(() => {
+        slides[current].classList.remove('active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('active');
+    }, 4000); // slower transition for VIP feel
+</script>
+
+
+
+

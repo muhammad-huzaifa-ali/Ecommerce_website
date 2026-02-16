@@ -1,0 +1,183 @@
+﻿@model Ecommerce_website.Models.Customer
+
+
+
+<div class="container py-5 fade-in">
+
+    <div class="text-center mb-5">
+        <h1 class="checkout-title">🛒 Secure Checkout</h1>
+        <p class="text-muted fs-5">Complete your order in seconds</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- PRODUCT -->
+        <div class="col-md-5">
+            <div class="glass-card p-4 text-center">
+
+                <img src="~/Product_images/@ViewBag.product.product_image"
+                     class="img-fluid product-img mb-3">
+
+                <h3 class="fw-bold">@ViewBag.product.product_name</h3>
+
+                <div class="price-tag mb-2">
+                    Rs. @ViewBag.product.product_price.ToString("N0")
+                </div>
+
+                <p class="text-muted mb-1">
+                    Category:
+                    <b>@ViewBag.product.category.category_name</b>
+                </p>
+
+                <p class="small text-secondary">
+                    @ViewBag.product.product_description
+                </p>
+
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="col-md-7">
+            <div class="glass-card p-4">
+
+                <h4 class="fw-bold mb-4">👤 Shipping Details</h4>
+
+                <form asp-action="ConfirmOrder" asp-controller="User" method="post">
+
+                    <input type="hidden" name="product_id"
+                           value="@ViewBag.product.product_id" />
+
+                    <label class="fw-semibold">Quantity</label>
+                    <input type="number" name="quantity"
+                           value="1" min="1"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Full Name</label>
+                    <input type="text" name="customer_name"
+                           value="@Model.customer_name"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Phone</label>
+                    <input type="text" name="customer_phone"
+                           value="@Model.customer_phone"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Address</label>
+                    <textarea name="customer_address"
+                              class="form-control mb-3"
+                              rows="3">@Model.customer_address</textarea>
+
+                    <label class="fw-semibold">City</label>
+                    <input type="text" name="customer_city"
+                           value="@Model.customer_city"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Country</label>
+                    <input type="text" name="customer_country"
+                           value="@Model.customer_country"
+                           class="form-control mb-4" />
+
+                    <button type="submit" class="order-btn w-100">
+                        🛍 Confirm & Place Order
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<style>
+    body {
+        background: linear-gradient(135deg,#eef2ff,#f8f9ff);
+    }
+
+    .checkout-title {
+        font-size: 38px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card {
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        transition: .4s;
+    }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.2);
+        }
+
+    .product-img {
+        max-height: 260px;
+        object-fit: contain;
+        transition: .4s;
+    }
+
+        .product-img:hover {
+            transform: scale(1.08);
+        }
+
+    .price-tag {
+        font-size: 28px;
+        font-weight: 800;
+        color: #ff8800;
+    }
+
+    .form-control {
+        border-radius: 14px;
+        padding: 14px;
+        border: 1px solid #e2e2e2;
+        transition: .3s;
+    }
+
+        .form-control:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 3px rgba(255,179,0,0.15);
+        }
+
+    .order-btn {
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        border: none;
+        border-radius: 30px;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: .5px;
+        transition: .4s;
+    }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeUp .6s ease forwards;
+    }
+
+    @@keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

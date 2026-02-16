@@ -1,0 +1,127 @@
+﻿@model Ecommerce_website.Models.Customer
+@{
+    ViewData["Title"] = "My Account";
+}
+
+<style>
+    body {
+        background: #f4f6f9;
+    }
+
+    .profile-wrapper {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .profile-card {
+        max-width: 680px;
+        width: 100%;
+        border-radius: 22px;
+        border: none;
+        background: #ffffff;
+    }
+
+    .profile-img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 4px solid #0d6efd;
+        background: #fff;
+    }
+
+    .profile-name {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .profile-email {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .info-row {
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f1f1;
+        font-size: 15px;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        color: #6c757d;
+        font-weight: 600;
+    }
+
+    .btn-main {
+        border-radius: 14px;
+        padding: 12px;
+        font-weight: 600;
+    }
+
+
+</style>
+
+<div class="container profile-wrapper">
+    <div class="profile-card shadow-lg p-4 p-md-5">
+
+        <h3 class="fw-bold text-primary text-center mb-3">My Account</h3>
+
+        <!-- PROFILE IMAGE -->
+        <div class="text-center mb-3">
+            <img src="~/Customer_images/@Model.customer_image"
+                 class="rounded-circle img-fluid d-block mx-auto
+            w-50 w-sm-50 w-md-25 w-lg-25"
+                 style="max-width:140px; height:auto; object-fit:cover;">
+
+
+            <div class="profile-name">@Model.customer_name</div>
+            <div class="profile-email">@Model.customer_email</div>
+        </div>
+
+        <hr />
+
+        <!-- PROFILE DETAILS -->
+        <div class="info-row d-flex justify-content-between">
+            <span class="info-label">Phone</span>
+            <span>@Model.customer_phone</span>
+        </div>
+
+
+        <div class="info-row d-flex justify-content-between">
+            <span class="info-label">Gender</span>
+            <span>@Model.customer_gender</span>
+        </div>
+
+        <div class="info-row d-flex justify-content-between">
+            <span class="info-label">Country</span>
+            <span>@Model.customer_country</span>
+        </div>
+
+        <div class="info-row d-flex justify-content-between">
+            <span class="info-label">City</span>
+            <span>@Model.customer_city</span>
+        </div>
+
+        <div class="info-row d-flex justify-content-between">
+            <span class="info-label">Address</span>
+            <span class="text-end" style="max-width:60%;">
+                @Model.customer_address
+            </span>
+        </div>
+
+        <!-- ACTION -->
+        <div class="mt-4 d-grid">
+            <a asp-action="EditCustomer"
+               asp-controller="User"
+               class="btn btn-primary btn-main shadow-sm">
+                <i class="bi bi-pencil-square me-1"></i> Edit Profile
+            </a>
+        </div>
+
+    </div>
+</div>

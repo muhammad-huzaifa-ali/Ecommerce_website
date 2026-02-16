@@ -1,0 +1,170 @@
+﻿@model Ecommerce_website.Models.Admin
+@{
+    Layout = "_Dashboard";
+}
+
+<style>
+    .profile-wrapper {
+        min-height: calc(100vh - 56px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background: #f4f6f9;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 480px;
+        background: #fff;
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+    }
+
+    .profile-title {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #0d6efd;
+    }
+
+    .profile-image-box {
+        position: relative;
+        display: inline-block;
+    }
+
+
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #fff;
+        box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    }
+
+    .edit-img-btn {
+        position: absolute;
+        bottom: 6px;
+        right: 6px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: none;
+        background: #0d6efd;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 18px rgba(13,110,253,.45);
+        transition: background .25s ease, box-shadow .25s ease;
+    }
+
+        .edit-img-btn:hover {
+            background: #0b5ed7;
+            box-shadow: 0 10px 26px rgba(13,110,253,.6);
+        }
+
+
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 .15rem rgba(13,110,253,.25);
+    }
+
+    .readonly-input {
+        background: #f1f3f6;
+        cursor: not-allowed;
+    }
+
+    .save-btn {
+        background: linear-gradient(90deg,#0d6efd,#00c6ff);
+        border: none;
+        font-weight: 600;
+        box-shadow: 0 10px 30px rgba(13,110,253,.45);
+        transition: .3s;
+    }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 45px rgba(13,110,253,.6);
+        }
+</style>
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+
+        <!-- BACK -->
+        <div class="d-flex justify-content-end mb-2">
+            <a asp-action="Index"
+               class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <!-- IMAGE FORM -->
+        <form asp-action="Admin_image"
+              method="post"
+              enctype="multipart/form-data"
+              class="text-center mb-3">
+
+            <div class="profile-image-box">
+                <img src="~/admin_image/@(Model.admin_image ?? "default.png")"
+                     asp-append-version="true"
+                     class="profile-img"
+                     alt="Profile Image" />
+
+                <button type="button"
+                        class="edit-img-btn"
+                        onclick="document.getElementById('adminImageInput').click()">
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            </div>
+
+            <input type="file"
+                   id="adminImageInput"
+                   name="admin_image"
+                   hidden
+                   onchange="this.form.submit()" />
+        </form>
+
+        <h3 class="profile-title">Admin Profile</h3>
+
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-success text-center">
+                @ViewBag.message
+            </div>
+        }
+
+        <!-- PROFILE FORM -->
+        <form asp-action="Profile" method="post">
+            <input type="hidden" asp-for="admin_id" />
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Name</label>
+                <input asp-for="admin_name" class="form-control form-control-lg" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Email</label>
+                <input asp-for="admin_email"
+                       class="form-control form-control-lg readonly-input"
+                       readonly />
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Password</label>
+                <input asp-for="admin_password"
+                       type="password"
+                       class="form-control form-control-lg" />
+            </div>
+
+            <button type="submit"
+                    class="btn save-btn w-100 btn-lg">
+                Update Profile
+            </button>
+        </form>
+
+    </div>
+</div>

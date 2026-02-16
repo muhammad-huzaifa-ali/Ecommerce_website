@@ -1,0 +1,104 @@
+﻿ @model Ecommerce_website.Models.Product
+
+@{
+    Layout = "_Dashboard";
+
+}
+
+<h2 class="mb-3">Edit Product</h2>
+
+<form asp-action="EditProduct"
+      method="post"
+      enctype="multipart/form-data">
+
+
+    <input type="hidden" asp-for="product_id" />
+
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <input asp-for="product_name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input asp-for="product_price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="product_description" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select asp-for="category_id"
+                asp-items="ViewBag.CategoryList"
+                class="form-control">
+        </select>
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="is_top_product" class="form-check-input" />
+        <label class="form-check-label">
+            Show on Home Page (Top Product)
+        </label>
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Experience Section</label>
+        <select asp-for="ExperienceType" class="form-select">
+            <option value="">-- Select Section --</option>
+            <option value="Gaming">Gaming</option>
+            <option value="WorkFromHome">Work From Home</option>
+            <option value="SmartLiving">Smart Living</option>
+            <option value="Entertainment">Entertainment</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Experience Order</label>
+        <input asp-for="ExperienceOrder"
+               type="number"
+               class="form-control"
+               min="1" />
+    </div>
+
+
+    <div class="mb-3 form-check">
+        <input asp-for="show_in_experience" class="form-check-input" />
+        <label class="form-check-label">
+            Show on experience page  (In section)
+        </label>
+
+    </div>
+
+   
+
+
+    <div class="mb-3">
+        <label class="form-label">Current Image</label><br />
+
+        @if (!string.IsNullOrEmpty(Model.product_image))
+        {
+            <img src="~/Product_images/@Model.product_image"
+                 width="80" height="80"
+                 style="object-fit:cover;border-radius:6px;" />
+        }
+        else
+        {
+            <span class="text-muted">No image</span>
+        }
+    </div>
+
+
+    <div class="mb-3">
+        <label class="form-label">Change Image</label>
+        <input type="file" name="imgfile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a asp-action="FetchProduct" class="btn btn-secondary">Back</a>
+</form>
+ 
+

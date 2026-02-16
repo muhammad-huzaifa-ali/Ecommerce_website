@@ -1,0 +1,150 @@
+﻿@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@model List<Ecommerce_website.Models.Order>
+
+<style>
+    .vip-table th {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    .vip-table tbody tr {
+        transition: all .2s ease;
+    }
+
+        .vip-table tbody tr:hover {
+            background-color: rgba(13,110,253,.04);
+        }
+
+    .action-btn {
+        border: none;
+        background: transparent;
+        padding: 3px 5px;
+        transition: .2s;
+        border-radius: 6px;
+    }
+
+        .action-btn.view {
+            color: #0d6efd;
+        }
+
+        .action-btn.delete {
+            color: #dc3545;
+        }
+
+        .action-btn:hover {
+            background: rgba(0,0,0,.05);
+            transform: scale(1.1);
+        }
+
+    .vip-table th,
+    .vip-table td {
+        vertical-align: middle;
+        white-space: nowrap;
+        padding: 10px 12px;
+    }
+
+    /* gap kam between total & action */
+    .tight {
+        padding-right: 4px !important;
+    }
+</style>
+
+<div class="container-fluid py-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                <h5 class="fw-bold text-primary mb-0">Orders List</h5>
+
+                <span class="badge bg-light text-dark">
+                    Total Orders: @Model.Count
+                </span>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table vip-table align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th class="tight">Total</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @{
+                            decimal grand = 0;
+                        }
+
+                        @foreach (var item in Model)
+                        {
+                            decimal total = item.product.product_price * item.quantity;
+                            grand += total;
+
+                            <tr>
+                                <td class="fw-semibold">
+                                    @item.customer.customer_name
+                                </td>
+
+                                <td>
+                                    @item.product.product_name
+                                </td>
+
+                                <td>
+                                    <span class="badge bg-dark p-2">
+                                        @item.quantity
+                                    </span>
+                                </td>
+
+                                <td class="fw-bold text-success tight">
+                                    Rs @total
+                                </td>
+
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-1">
+
+                                        <a class="action-btn view"
+                                           href="@Url.Action("OrderDetails", "Admin", new { id = item.order_id })">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+
+                                        <a class="action-btn delete"
+                                           href="@Url.Action("DeleteOrder", "Admin", new { id = item.order_id })"
+                                           onclick="return confirm('Delete this order?')">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr class="table-warning fw-bold">
+                            <td colspan="3" class="text-end">Total Sales</td>
+                            <td colspan="2">Rs @grand</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+        </div>
+            <div class="d-flex justify-content-end mb-3">
+                <a href="/Admin/ClearAllOrders"
+                   class="btn btn-danger"
+                   onclick="return confirm('Are you sure? Sab orders delete ho jayenge!')">
+                    🗑 Clear All Orders
+                </a>
+            </div>
+    </div>
+</div>

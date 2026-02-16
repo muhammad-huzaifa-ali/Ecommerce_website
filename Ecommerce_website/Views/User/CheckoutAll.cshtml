@@ -1,0 +1,186 @@
+﻿@model Ecommerce_website.Models.Customer
+@{
+    var cart = ViewBag.cart as List<Ecommerce_website.Models.Cart>;
+}
+
+<div class="container py-5 fade-in">
+
+    <div class="text-center mb-5">
+        <h1 class="checkout-title">🧾 Checkout</h1>
+        <p class="text-muted fs-5">Confirm your order details</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- SHIPPING -->
+        <div class="col-lg-6">
+            <div class="glass-card p-4">
+
+                <h4 class="fw-bold mb-4">👤 Shipping Details</h4>
+
+                <form action="/User/ConfirmOrderAll" method="post">
+
+                    <label class="fw-semibold">Full Name</label>
+                    <input type="text" name="customer_name"
+                           value="@Model.customer_name"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Phone</label>
+                    <input type="text" name="customer_phone"
+                           value="@Model.customer_phone"
+                           class="form-control mb-3" />
+
+                    <label class="fw-semibold">Address</label>
+                    <textarea name="customer_address"
+                              class="form-control mb-3"
+                              rows="3">@Model.customer_address</textarea>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="fw-semibold">City</label>
+                            <input type="text" name="customer_city"
+                                   value="@Model.customer_city"
+                                   class="form-control mb-3" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Country</label>
+                            <input type="text" name="customer_country"
+                                   value="@Model.customer_country"
+                                   class="form-control mb-3" />
+                        </div>
+                    </div>
+
+                    <button class="order-btn w-100 mt-3">
+                        🛍 Confirm All Orders
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- CART SUMMARY -->
+        <div class="col-lg-6">
+            <div class="glass-card p-4">
+
+                <h4 class="fw-bold mb-3">🛒 Order Summary</h4>
+
+                <div class="table-responsive">
+                    <table class="table text-center align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @{
+                                decimal grand = 0;
+                            }
+
+                            @foreach (var item in cart)
+                            {
+                                decimal price = item.product.product_price;
+                                decimal total = price * item.product_quantity;
+                                grand += total;
+
+                                <tr>
+                                    <td>@item.product.product_name</td>
+                                    <td>Rs @price.ToString("N0")</td>
+                                    <td>@item.product_quantity</td>
+                                    <td class="fw-bold text-success">Rs @total.ToString("N0")</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <h5 class="fw-bold">Grand Total</h5>
+                    <h4 class="price-tag">Rs @grand.ToString("N0")</h4>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<style>
+    body {
+        background: linear-gradient(135deg,#eef2ff,#f8f9ff);
+    }
+
+    .checkout-title {
+        font-size: 38px;
+        font-weight: 800;
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .glass-card {
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        transition: .4s;
+    }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+        }
+
+    .price-tag {
+        font-size: 26px;
+        font-weight: 800;
+        color: #ff8800;
+    }
+
+    .form-control {
+        border-radius: 14px;
+        padding: 14px;
+        border: 1px solid #e2e2e2;
+        transition: .3s;
+    }
+
+        .form-control:focus {
+            border-color: #ffb300;
+            box-shadow: 0 0 0 3px rgba(255,179,0,0.15);
+        }
+
+    .order-btn {
+        background: linear-gradient(45deg,#ffb300,#ff6a00);
+        border: none;
+        border-radius: 30px;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        transition: .4s;
+    }
+
+        .order-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: fadeUp .6s ease forwards;
+    }
+
+    @@keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

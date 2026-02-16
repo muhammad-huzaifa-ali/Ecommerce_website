@@ -1,0 +1,133 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminAuthLayout.cshtml";
+}
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+<body class="login-page">
+
+    <div class="login-container">
+        <h3>Admin Login</h3>
+
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.message
+            </div>
+        }
+
+        <form method="post"
+              asp-action="Admin_Login"
+              asp-controller="Admin"
+              autocomplete="off">
+
+            <!-- 🔹 Hidden dummy inputs for Chrome/Edge auto-fill -->
+            <input type="text" name="fakeusernameremembered" style="display:none">
+            <input type="password" name="fakepasswordremembered" style="display:none">
+
+            <div class="mb-3">
+                <input type="email"
+                       name="Adminemail"
+                       class="form-control"
+                       placeholder="Enter your email"
+                       autocomplete="off"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <input type="password"
+                       name="Adminpassword"
+                       class="form-control"
+                       placeholder="Enter your password"
+                       autocomplete="new-password"
+                       required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+        </form>
+    </div>
+
+    <style>
+        body.login-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 42px 36px;
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+        }
+
+
+        .fade {
+            transition: opacity .5s ease, transform .5s ease;
+            transform: translateY(12px);
+        }
+
+       .fade.show {
+         opacity: 1;
+         transform: translateY(0);
+         }
+ 
+
+        .login-container h3 {
+            margin-bottom: 28px;
+            font-size: 26px;
+            font-weight: 700;
+            color: #1e293b;
+            letter-spacing: 0.5px;
+        }
+
+        .login-container .alert {
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .login-container input.form-control {
+            border-radius: 12px;
+            border: 1px solid #d0d7de;
+            font-size: 15px;
+            padding: 14px 15px;
+            transition: all 0.25s ease;
+        }
+
+            .login-container input.form-control:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+            }
+
+        .login-container button.btn-primary {
+            margin-top: 10px;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border: none;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .login-container button.btn-primary:hover {
+                box-shadow: 0 10px 28px rgba(37,99,235,0.5);
+            }
+    </style>
+
+
+    
+</body>
